@@ -9,7 +9,7 @@
     "start": "node dist/index.js",
     "prestart:cold": "npm run build",
     "start:cold": "node dist/index.js",
-    "start:dev": "nodemon dist/index.js --exec \"npm run start\" --watch src/index.js",
+    "start:dev": "nodemon dist/index.js --exec \"npm run start\" --watch src",
     "test": "jest --runInBand",
     "build": "rollup -c",
     "prepublish": "npm run test && npm run build",
