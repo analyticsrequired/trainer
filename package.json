@@ -1,0 +1,24 @@
+{
+  "name": "@analyticsrequired/trainer",
+  "version": "0.0.0",
+  "description": "Anayltics Required Training Service",
+  "main": "dist/index.js",
+  "author": "Kylee Tilley <kylee@testingrequired.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --runInBand",
+    "build": "rollup -c",
+    "prepublish": "npm run test && npm run build",
+    "pack-preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/preset-env": "^7.3.0",
+    "babel-jest": "^24.0.0",
+    "jest": "^24.0.0",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2"
+  }
+}
