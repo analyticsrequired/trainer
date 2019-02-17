@@ -13,7 +13,10 @@
     "test": "jest --runInBand",
     "build": "rollup -c",
     "prepublish": "npm run test && npm run build",
-    "pack-preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz"
+    "pack-preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "knex": "knex",
+    "knex:latest": "knex migrate:latest",
+    "knex:reset": "rm dev.sqlite3 && npm run knex:latest"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -22,11 +25,13 @@
     "@babel/preset-env": "^7.3.0",
     "babel-jest": "^24.0.0",
     "jest": "^24.0.0",
+    "nodemon": "^1.18.10",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
-    "nodemon": "^1.18.10"
+    "sqlite3": "^4.0.6"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "knex": "^0.16.3"
   }
 }
