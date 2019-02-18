@@ -1,12 +1,13 @@
 import express from "express";
 import morgan from "morgan";
+import root from "./routes/root";
 
 const server = express();
 
 server.use(morgan("tiny"));
 
-server.get(`/`, (_, res) => {
-  res.send("Analytics Required Trainer Service");
-});
+// Routes
+
+root(server);
 
 export default server;
