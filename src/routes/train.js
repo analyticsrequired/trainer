@@ -1,4 +1,4 @@
-import { train, getTraining } from "../../services/training";
+import { train, getTraining } from "../services/training";
 
 export default server => {
   server.post(`/train`, (req, res) => {
