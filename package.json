@@ -14,8 +14,8 @@
     "build": "rollup -c",
     "prepublish": "npm run test && npm run build",
     "pack-preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-    "knex": "knex",
-    "knex:latest": "knex migrate:latest",
+    "knex": "knex --knexfile dist/knexfile.js",
+    "knex:latest": "npm run knex migrate:latest",
     "knex:reset": "rm dev.sqlite3 && npm run knex:latest"
   },
   "devDependencies": {

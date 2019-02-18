@@ -1,10 +1,10 @@
 // Update with your config settings.
 
-module.exports = {
-  development: {
-    client: "sqlite3",
-    connection: {
-      filename: "./development.sqlite3"
-    }
+const development = {
+  client: "sqlite3",
+  connection: {
+    filename: "./development.sqlite3"
   }
 };
+
+export default { development };
