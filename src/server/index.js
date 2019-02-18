@@ -5,6 +5,13 @@ import train from "./routes/train";
 
 const server = express();
 
+server.use(express.json());
+server.use(
+  express.urlencoded({
+    extended: true
+  })
+);
+
 server.use(morgan("tiny"));
 
 // Routes
