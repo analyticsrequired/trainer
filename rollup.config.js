@@ -13,18 +13,5 @@ export default [
         exclude: "node_modules/**"
       })
     ]
-  },
-  {
-    input: "knexfile.js",
-    output: {
-      file: "dist/knexfile.js",
-      format: "cjs",
-      sourcemap: "inline"
-    },
-    plugins: [
-      babel({
-        exclude: "node_modules/**"
-      })
-    ]
   }
 ];

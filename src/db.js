@@ -1,7 +1,8 @@
 import knex from "knex";
-import knexfile from "../knexfile";
 
-const env = process.env.NODE_ENV || "development";
+const knexfile = require("../knexfile");
+
+const env = process.env.NODE_ENV || "local";
 
 const config = knexfile[env];
 
