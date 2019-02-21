@@ -45,7 +45,7 @@ function validateDocument(document) {
   const errors = [];
 
   if (!document) {
-    errors.push("doucment is required");
+    errors.push("document is required");
     return errors;
   }
 
