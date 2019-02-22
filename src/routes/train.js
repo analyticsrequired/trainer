@@ -1,32 +1,35 @@
 import { train, getTraining } from "../services/training";
 
-export default server => {
-  server.post(`/train`, (req, res) => {
-    const errors = validate(req.body);
+export function trainPost(req, res) {
+  const errors = validate(req.body);
 
-    if (errors.length) {
-      console.log(`ERRORS: ${JSON.stringify(errors)}`);
-      res.status(400).json(errors);
-      return;
-    }
+  if (errors.length) {
+    console.log(`ERRORS: ${JSON.stringify(errors)}`);
+    res.status(400).json(errors);
+    return;
+  }
 
-    train(req.body.document, req.body.classification, req.body.belongs)
-      .then(() => {
-        res.status(201).end();
-      })
-      .catch(e => {
-        console.log(`ERROR: ${e}`);
-        res
-          .status(500)
-          .send(`A server error occurred when training. Please resubmit.`);
-      });
-  });
-
-  server.get(`/train`, (req, res) => {
-    getTraining(req.query).then(rows => {
-      res.json(rows);
+  train(req.body.document, req.body.classification, req.body.belongs)
+    .then(() => {
+      res.status(201).end();
+    })
+    .catch(e => {
+      console.log(`ERROR: ${e}`);
+      res
+        .status(500)
+        .send(`A server error occurred when training. Please resubmit.`);
     });
+}
+
+export function trainGet(req, res) {
+  getTraining(req.query).then(rows => {
+    res.json(rows);
   });
+}
+
+export default server => {
+  server.post(`/train`, trainPost);
+  server.get(`/train`, trainGet);
 };
 
 function validate(reqBody) {
@@ -44,7 +47,7 @@ function validate(reqBody) {
 function validateDocument(document) {
   const errors = [];
 
-  if (!document) {
+  if (typeof document === "undefined" || document === null) {
     errors.push("document is required");
     return errors;
   }
@@ -59,7 +62,7 @@ function validateDocument(document) {
 function validateClassification(classification) {
   const errors = [];
 
-  if (!classification) {
+  if (typeof classification === "undefined" || classification === null) {
     errors.push("classification is required");
     return errors;
   }
@@ -82,13 +85,8 @@ function validateClassification(classification) {
 function validateBelongs(belongs) {
   const errors = [];
 
-  if (typeof belongs === "undefined") {
-    errors.push("belongs is required");
-    return errors;
-  }
-
   if (typeof belongs !== "boolean") {
-    errors.push("belongs must be a boolean");
+    errors.push("belongs is required and must be a boolean");
   }
 
   return errors;
