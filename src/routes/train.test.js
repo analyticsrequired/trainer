@@ -3,7 +3,7 @@ import { trainPost } from "./train";
 describe("post controller", () => {
   let req;
 
-  const res = {};
+  let res;
 
   beforeEach(() => {
     req = {
@@ -14,9 +14,10 @@ describe("post controller", () => {
       }
     };
 
-    res.status = jest.fn(() => res);
-
-    res.json = jest.fn(() => res);
+    res = {
+      status: jest.fn(() => res),
+      json: jest.fn(() => res)
+    };
   });
 
   describe("validation", () => {

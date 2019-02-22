@@ -1,5 +1,10 @@
 import { train, getTraining } from "../services/training";
 
+export default server => {
+  server.post(`/train`, trainPost);
+  server.get(`/train`, trainGet);
+};
+
 export function trainPost(req, res) {
   const errors = validate(req.body);
 
@@ -22,15 +27,8 @@ export function trainPost(req, res) {
 }
 
 export function trainGet(req, res) {
-  getTraining(req.query).then(rows => {
-    res.json(rows);
-  });
+  getTraining(req.query).then(rows => res.json(rows));
 }
-
-export default server => {
-  server.post(`/train`, trainPost);
-  server.get(`/train`, trainGet);
-};
 
 function validate(reqBody) {
   const { document, classification, belongs } = reqBody;
