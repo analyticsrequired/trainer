@@ -1,8 +1,15 @@
 import { trainPost } from "./train";
 
+jest.mock("../services/training", () => {
+  return {
+    train: jest.fn()
+  };
+});
+
+const { train } = require.requireMock("../services/training");
+
 describe("post controller", () => {
   let req;
-
   let res;
 
   beforeEach(() => {
@@ -16,8 +23,36 @@ describe("post controller", () => {
 
     res = {
       status: jest.fn(() => res),
-      json: jest.fn(() => res)
+      json: jest.fn(() => res),
+      end: jest.fn(() => res)
     };
+  });
+
+  it("should call train", () => {
+    train.mockResolvedValue(true);
+    trainPost(req, res);
+
+    expect(train).toBeCalledWith(
+      req.body.document,
+      req.body.classification,
+      req.body.belongs
+    );
+  });
+
+  describe("when training successful", () => {
+    it.todo("should return 201", () => {
+      train.mockResolvedValue(true);
+      trainPost(req, res);
+      expect(res.status).toBeCalledWith(201);
+    });
+  });
+
+  describe("whne training fails", () => {
+    it.todo("should return 500", () => {
+      train.mockResolvedValue(true);
+      trainPost(req, res);
+      expect(res.status).toBeCalledWith(500);
+    });
   });
 
   describe("validation", () => {
