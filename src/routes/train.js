@@ -1,3 +1,4 @@
+import logger from "../logger";
 import { train, getTraining } from "../services/training";
 
 export default server => {
@@ -9,7 +10,7 @@ export function trainPost(req, res) {
   const errors = validate(req.body);
 
   if (errors.length) {
-    console.log(`ERRORS: ${JSON.stringify(errors)}`);
+    logger.info("Invalid Training", { errors });
     res.status(400).json(errors);
     return;
   }
@@ -19,7 +20,7 @@ export function trainPost(req, res) {
       res.status(201).end();
     })
     .catch(e => {
-      console.log(`ERROR: ${e}`);
+      logger.error(`ERROR: ${e}`);
       res
         .status(500)
         .send(`A server error occurred when training. Please resubmit.`);
@@ -27,7 +28,16 @@ export function trainPost(req, res) {
 }
 
 export function trainGet(req, res) {
-  getTraining(req.query).then(rows => res.json(rows));
+  getTraining(req.query)
+    .then(rows => res.json(rows))
+    .catch(e => {
+      logger.error(`ERROR: ${e}`);
+      res
+        .status(500)
+        .send(
+          `A server error occurred when retreiving training. Please resubmit.`
+        );
+    });
 }
 
 function validate(reqBody) {
