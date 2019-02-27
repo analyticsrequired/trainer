@@ -40,7 +40,7 @@ describe("post controller", () => {
   });
 
   describe("when training successful", () => {
-    it.todo("should return 201", () => {
+    it.skip("should return 201", () => {
       train.mockResolvedValue(true);
       trainPost(req, res);
       expect(res.status).toBeCalledWith(201);
@@ -48,7 +48,7 @@ describe("post controller", () => {
   });
 
   describe("whne training fails", () => {
-    it.todo("should return 500", () => {
+    it.skip("should return 500", () => {
       train.mockResolvedValue(true);
       trainPost(req, res);
       expect(res.status).toBeCalledWith(500);
