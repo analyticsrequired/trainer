@@ -1,7 +1,8 @@
 import express from "express";
-import morgan from "morgan";
+import expressWinston from "express-winston";
 import root from "./routes/root";
 import train from "./routes/train";
+import logger from "./logger";
 
 const server = express();
 
@@ -12,7 +13,17 @@ server.use(
   })
 );
 
-server.use(morgan("tiny"));
+expressWinston.requestWhitelist.push("body");
+
+server.use(
+  expressWinston.logger({
+    winstonInstance: logger,
+    meta: true,
+    msg: "HTTP {{req.method}} {{req.url}}",
+    expressFormat: true,
+    colorize: false
+  })
+);
 
 // Routes
 
