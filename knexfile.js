@@ -7,9 +7,6 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: {
-      host: process.env.DATABASE_URL + "?ssl=true",
-      database: "trainer"
-    }
+    connection: process.env.DATABASE_URL + "?ssl=true"
   }
 };
