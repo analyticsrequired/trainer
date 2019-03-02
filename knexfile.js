@@ -4,5 +4,12 @@ module.exports = {
     connection: {
       filename: "./local.sqlite3"
     }
+  },
+  production: {
+    client: "postgres",
+    connection: {
+      host: process.env.DATABASE_URL,
+      database: "trainer"
+    }
   }
 };
