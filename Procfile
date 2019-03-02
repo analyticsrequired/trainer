@@ -1,1 +1,2 @@
-web: npm run knex:latest && node dist/index.js
+release: npm run knex:latest
+web: node dist/index.js
