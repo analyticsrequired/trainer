@@ -6,7 +6,7 @@ exports.up = knex =>
     table.string("document");
     table.string("classification");
     table.boolean("belongs");
-    table.timestamps();
+    table.timestamps(true, true);
   });
 
 exports.down = knex => knex.dropTableIfExists(tableName);
