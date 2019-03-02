@@ -1,0 +1,1 @@
+web: npm run knex:latest && node dist/index.js
