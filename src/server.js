@@ -1,6 +1,7 @@
 import express from "express";
 import expressWinston from "express-winston";
 import root from "./routes/root";
+import auth from "./routes/auth";
 import train from "./routes/train";
 import logger from "./logger";
 
@@ -28,6 +29,7 @@ server.use(
 // Routes
 
 root(server);
+auth(server);
 train(server);
 
 export default server;

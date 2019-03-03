@@ -1,9 +1,18 @@
+import passport from "passport";
 import logger from "../logger";
 import { train, getTraining } from "../services/training";
 
 export default server => {
-  server.post(`/train`, trainPost);
-  server.get(`/train`, trainGet);
+  server.post(
+    `/train`,
+    passport.authenticate("jwt", { session: false }),
+    trainPost
+  );
+  server.get(
+    `/train`,
+    passport.authenticate("jwt", { session: false }),
+    trainGet
+  );
 };
 
 export function trainPost(req, res) {
