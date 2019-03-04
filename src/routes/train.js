@@ -1,16 +1,21 @@
 import passport from "passport";
 import logger from "../logger";
 import { train, getTraining } from "../services/training";
+import expressJwtPermissions from "express-jwt-permissions";
+
+const guard = expressJwtPermissions();
 
 export default server => {
   server.post(
     `/train`,
     passport.authenticate("jwt", { session: false }),
+    guard.check([["admin"], ["train:write"]]),
     trainPost
   );
   server.get(
     `/train`,
     passport.authenticate("jwt", { session: false }),
+    guard.check([["admin"], ["train:read"]]),
     trainGet
   );
 };
