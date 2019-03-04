@@ -32,4 +32,10 @@ root(server);
 auth(server);
 train(server);
 
+server.use(function(err, req, res, next) {
+  if (err.code === "permission_denied") {
+    res.status(403).end();
+  }
+});
+
 export default server;
